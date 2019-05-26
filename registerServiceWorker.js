@@ -45,10 +45,10 @@ navigator.serviceWorker.ready.then(registration => {
     body: "are you ok?",
     icon: "/github_page/qq.png",
     badge: "/github_page/微信.png",
-    tag: "hello",
+    tag: "hello world",
     actions: [],
     // 震动模式
-    vibrate: [500,100,500,100,500,100]
+    vibrate: [200, 100, 200, 100, 200, 100, 200,200, 100, 200, 100, 200, 100, 200]
   });
 });
 
