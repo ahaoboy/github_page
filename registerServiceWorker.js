@@ -48,7 +48,7 @@ navigator.serviceWorker.ready.then(registration => {
     tag: "hello",
     actions: [],
     // 震动模式
-    vibrate: []
+    vibrate: [500,100,500,100,500,100]
   });
 });
 
