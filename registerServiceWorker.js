@@ -43,8 +43,8 @@ if ("serviceWorker" in navigator) {
 navigator.serviceWorker.ready.then(registration => {
   registration.showNotification("card", {
     body: "are you ok?",
-    icon: "/qq.png",
-    badge: "/微信.png",
+    // icon: "/qq.png",
+    // badge: "/微信.png",
     tag: "hello",
     actions: [],
     // 震动模式
