@@ -29,20 +29,25 @@ self.addEventListener("install", function (event) {
 self.addEventListener("fetch", event => {
   // console.log('event', event)
   let url = new URL(event.request.url)
+
+  // 缓存策略过滤
   if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
     console.log("url cached", url, event)
     return
   }
 
+  // 本地域名过滤,只缓存自己域名下的文件
   if (!url.host.includes(HOST) ||
     !url.href ||
     !url.href.startsWith("http") ||
     !url.href.startsWith("https")) {
     console.log("url", url, event)
-    event.respondWith(fetch(event.request))
+    event.respondWith(fetch(event.request).catch(() => console.log("catch", event)))
     return
   }
 
+  // url 过滤, 确保herf存在,并且是域名下
+  // 避免加载chrome的拓展出现的问题
   if (url.host.includes(HOST))
     event.respondWith(
       caches.open(CACHE_NAME).then(cache =>
@@ -50,7 +55,7 @@ self.addEventListener("fetch", event => {
           let fetchPromise = fetch(event.request).then(networkResponse => {
             cache.put(event.request, networkResponse.clone());
             return networkResponse;
-          });
+          }).catch(() => console.log("catch", event));
           return cacheResponse || fetchPromise;
         })
       )
