@@ -45,7 +45,7 @@ self.addEventListener("fetch", event => {
 
   // url 过滤, 确保herf存在,并且是域名下
   // 避免加载chrome的拓展出现的问题
-  if (url.host.includes(HOST)){
+  if (url.host.includes(HOST)) {
     event.respondWith(
       caches.open(CACHE_NAME).then(cache =>
         cache.match(event.request).then(cacheResponse => {
@@ -60,6 +60,7 @@ self.addEventListener("fetch", event => {
     return
   }
 
-
+  //   chrome-extension://jdbnofccmhefkmjbkkdkfiicjkgofkdh/img/icon-bookmark.svg
+  event.respondWith(fetch(event.request))
   console.log('=====', event)
 });
