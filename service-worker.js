@@ -26,16 +26,17 @@ self.addEventListener("install", function (event) {
 });
 
 
-
 self.addEventListener("fetch", event => {
   // console.log('event', event)
   let url = new URL(event.request.url)
-  if (!url.host.includes(HOST) ||
-    (event.request.cache === 'only-if-cached' &&
-    event.request.mode !== 'same-origin')
-  ) {
+  if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
+    console.log("url cached", url, event)
+    return;
+  }
+
+  if (!url.host.includes(HOST)) {
     console.log("url", url, event)
-    return event.respondWith(fetch(event.request))
+    event.respondWith(fetch(event.request))
   }
   event.respondWith(
     caches.open(CACHE_NAME).then(cache =>
