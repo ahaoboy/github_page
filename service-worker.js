@@ -31,20 +31,20 @@ self.addEventListener("fetch", event => {
   let url = new URL(event.request.url)
 
   // 缓存策略过滤
-  if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
-    console.log("url cached", url, event)
-    return
-  }
+  // if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
+  //   console.log("url cached", url, event)
+  //   return
+  // }
 
   // 本地域名过滤,只缓存自己域名下的文件
-  if (!url.host.includes(HOST) ||
-    !url.href ||
-    !url.href.startsWith("http") ||
-    !url.href.startsWith("https")) {
-    console.log("url", url, event)
-    event.respondWith(fetch(event.request).catch(() => console.log("catch", event)))
-    return
-  }
+  // if (!url.host.includes(HOST) ||
+  //   !url.href ||
+  //   !url.href.startsWith("http") ||
+  //   !url.href.startsWith("https")) {
+  //   console.log("url", url, event)
+  //   event.respondWith(fetch(event.request).catch(() => console.log("catch", event)))
+  //   return
+  // }
 
   // url 过滤, 确保herf存在,并且是域名下
   // 避免加载chrome的拓展出现的问题
