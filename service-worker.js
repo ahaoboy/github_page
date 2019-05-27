@@ -34,13 +34,16 @@ self.addEventListener("fetch", event => {
     return
   }
 
-  if (!url.host.includes(HOST) && url.href) {
+  if (!url.host.includes(HOST) ||
+    url.href ||
+    !url.href.startsWith("http") ||
+    !url.href.startsWith("https")) {
     console.log("url", url, event)
     event.respondWith(fetch(event.request))
     return
   }
 
-  if (url.href)
+  if (url.host.includes(HOST))
     event.respondWith(
       caches.open(CACHE_NAME).then(cache =>
         cache.match(event.request).then(cacheResponse => {
