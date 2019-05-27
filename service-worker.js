@@ -49,9 +49,12 @@ self.addEventListener("install", function (event) {
 
 
 self.addEventListener("fetch", event => {
-  // console.log('event', event.request, event.host)
+  console.log('event', event)
   let url = new URL(event.request.url)
-  if (!url.host.includes(HOST)) {
+  if (!url.host.includes(HOST) ||
+    event.request.cache === 'only-if-cached' ||
+    event.request.mode !== 'same-origin'
+  ) {
     console.log("url", url)
     return event.respondWith(fetch(event.request))
   }
