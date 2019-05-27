@@ -34,20 +34,22 @@ self.addEventListener("fetch", event => {
     return
   }
 
-  if (!url.host.includes(HOST)) {
+  if (!url.host.includes(HOST) && url.href) {
     console.log("url", url, event)
     event.respondWith(fetch(event.request))
     return
   }
-  event.respondWith(
-    caches.open(CACHE_NAME).then(cache =>
-      cache.match(event.request).then(cacheResponse => {
-        let fetchPromise = fetch(event.request).then(networkResponse => {
-          cache.put(event.request, networkResponse.clone());
-          return networkResponse;
-        });
-        return cacheResponse || fetchPromise;
-      })
-    )
-  );
+
+  if (url.href)
+    event.respondWith(
+      caches.open(CACHE_NAME).then(cache =>
+        cache.match(event.request).then(cacheResponse => {
+          let fetchPromise = fetch(event.request).then(networkResponse => {
+            cache.put(event.request, networkResponse.clone());
+            return networkResponse;
+          });
+          return cacheResponse || fetchPromise;
+        })
+      )
+    );
 });
