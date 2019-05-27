@@ -1,7 +1,6 @@
 console.log("service-worker.js");
 
 self.addEventListener("install", function (event) {
-  // Perform install steps
   console.log("install");
 });
 const CACHE_NAME = "cache-v1"
@@ -25,35 +24,15 @@ self.addEventListener("install", function (event) {
   console.log("install");
   self.skipWaiting()
 });
-//
-// self.addEventListener("fetch", event => {
-//   console.log("fetch", event.request.url);
-//   if (event.request.url.includes("css")) {
-//     console.log(event.request.url);
-//     event.respondWith(
-//       new Response(
-//         `
-//         body{
-//           background:gray;
-//         }
-//         `,
-//         {
-//           headers: {
-//             "Content-Type": "text/css"
-//           }
-//         }
-//       )
-//     );
-//   }
-// });
+
 
 
 self.addEventListener("fetch", event => {
   // console.log('event', event)
   let url = new URL(event.request.url)
   if (!url.host.includes(HOST) ||
-    event.request.cache === 'only-if-cached' ||
-    event.request.mode !== 'same-origin'
+    (event.request.cache === 'only-if-cached' &&
+    event.request.mode !== 'same-origin')
   ) {
     console.log("url", url, event)
     return event.respondWith(fetch(event.request))
