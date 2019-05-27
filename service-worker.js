@@ -37,6 +37,7 @@ self.addEventListener("fetch", event => {
   if (!url.host.includes(HOST)) {
     console.log("url", url, event)
     event.respondWith(fetch(event.request))
+    return
   }
   event.respondWith(
     caches.open(CACHE_NAME).then(cache =>
