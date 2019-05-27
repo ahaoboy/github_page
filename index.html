@@ -1,28 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <script src="./registerServiceWorker.js"></script>
+  <meta charset=utf-8>
+  <meta http-equiv=X-UA-Compatible content="IE=edge">
+  <meta name=viewport content="width=device-width,initial-scale=1">
+  <link rel=icon href=favicon.ico>
+  <title>fast_style_app</title>
+  <link href=css/app.84372b47.css rel=preload as=style>
+  <link href=js/app.2abb4c05.js rel=preload as=script>
+  <link href=js/chunk-vendors.8caacedf.js rel=preload as=script>
+  <link href=css/app.84372b47.css rel=stylesheet>
+
+  <script src="registerServiceWorker.js"></script>
+  <link rel="manifest" href="./manifest.json">
+
 </head>
 <body>
-
-<h1>
-  hello page sw
-
-<!--  https://ahaoboy.github.io/github_page -->
-</h1>
-<script>
-  Notification.requestPermission().then(
-    (permission) => {
-      console.log(permission)
-      alert(permission)
-      new Notification("hello")
-      if (permission === 'grand') {
-        new Notification("hello")
-      }
-    }
-  )
-</script>
+<noscript><strong>We're sorry but fast_style_app doesn't work properly without JavaScript enabled. Please enable it to
+  continue.</strong></noscript>
+<div id=app></div>
+<script src=js/chunk-vendors.8caacedf.js></script>
+<script src=js/app.2abb4c05.js></script>
 </body>
 </html>
