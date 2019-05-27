@@ -6,7 +6,7 @@ self.addEventListener("install", function (event) {
 const CACHE_NAME = "cache-v1"
 let immutableData = new Set(
   [
-    "/",
+    "/index.html",
     "/css",
     "/js",
     "/img",
