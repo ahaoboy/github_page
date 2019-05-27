@@ -1,8 +1,5 @@
 console.log("service-worker.js");
 
-self.addEventListener("install", function (event) {
-  console.log("install");
-});
 const CACHE_NAME = "cache-v1"
 let immutableData = new Set(
   [
@@ -22,7 +19,7 @@ const HOST = "github"
 self.addEventListener("install", function (event) {
   // Perform install steps
   console.log("install");
-  self.skipWaiting()
+  // self.skipWaiting()
 });
 
 
