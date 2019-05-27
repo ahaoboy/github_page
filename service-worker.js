@@ -35,7 +35,7 @@ self.addEventListener("fetch", event => {
   }
 
   if (!url.host.includes(HOST) ||
-    url.href ||
+    !url.href ||
     !url.href.startsWith("http") ||
     !url.href.startsWith("https")) {
     console.log("url", url, event)
