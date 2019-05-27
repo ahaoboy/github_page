@@ -31,7 +31,7 @@ self.addEventListener("fetch", event => {
   let url = new URL(event.request.url)
   if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
     console.log("url cached", url, event)
-    return;
+    return
   }
 
   if (!url.host.includes(HOST)) {
